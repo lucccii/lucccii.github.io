@@ -3,22 +3,97 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Redirection vers l'application Compense</title>
-  <script>
-    function redirect() {
-      var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
-      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        window.location.href = "https://apps.apple.com/fr/app/compense/id6740708929?l=en-GB";
-      } else if (/android/i.test(userAgent)) {
-        window.location.href = "https://play.google.com/store/apps/details?id=com.pmanteau1.compensesmart3&pcampaignid=web_share";
-      } else {
-        window.location.href = "https://lucccii.github.io"; // Redirection par défaut
-      }
-    }
-  </script>
+  <meta
+    name="description"
+    content="Compense calcule vos moyennes et ECTS avec les coefficients de votre cursus deja integres."
+  >
+  <title>Compense</title>
+  <link rel="stylesheet" href="./compense.css" type="text/css">
+  <link rel="icon" type="image/png" href="./assetsCompensePage/LOGO.png">
 </head>
-<body onload="redirect()">
-<p>Redirection en cours...</p>
+<body>
+      <div class="background-art" aria-hidden="true">
+        <img src="./assetsCompensePage/FOND.png" alt="">
+      </div>
+
+      <div id="left">
+        <h1 >REPREND LE CONTROLE DE TES RESULTATS</h1>
+
+        <p id="description">
+          Rentrez <strong>vous meme</strong> vos notes et <strong>Compense</strong>
+          simule votre moyenne, la validation du semestre et de votre annee ainsi
+          que votre mention. Ne laissez plus une mauvaise note vous deprimer au-dela
+          de son réel impact !
+        </p>
+
+        <div class="stores">
+          <a
+            class="store-link"
+            href="https://apps.apple.com/fr/app/compense/id6740708929?l=en-GB"
+            aria-label="Telecharger Compense dans l'App Store"
+          >
+            <img
+              src="./assetsCompensePage/BOUTONS/BOUTON APP STORE.png"
+              alt="Disponible dans l'App Store"
+            >
+          </a>
+
+          <a
+            class="store-link"
+            href="https://play.google.com/store/apps/details?id=com.pmanteau1.compensesmart3&amp;pcampaignid=web_share"
+            aria-label="Telecharger Compense sur Google Play"
+          >
+            <img
+              src="./assetsCompensePage/BOUTONS/BOUTON GG PLAY.png"
+              alt="Disponible sur Google Play"
+            >
+          </a>
+        </div>
+
+        <div id="container_cta">
+        <div id="call_to_action_btn">
+          <p>TÉLÉCHARGER L'APP</p>
+        </div>
+      </div>
+      </div>
+
+      <section id="visual" aria-hidden="true">
+        <div class="mockup-shell">
+          <img
+            class="mockup"
+            src="./assetsCompensePage/MOCKUP.png"
+            alt=""
+          >
+        </div>
+      </section>
+
+  <script>
+    (function () {
+      var appStoreUrl = "https://apps.apple.com/fr/app/compense/id6740708929?l=en-GB";
+      var playStoreUrl = "https://play.google.com/store/apps/details?id=com.pmanteau1.compensesmart3&pcampaignid=web_share";
+      var agent = navigator.userAgent || navigator.vendor || window.opera;
+      var isIOS = /iPad|iPhone|iPod/.test(agent) && !window.MSStream;
+      var isMac = /Macintosh|Mac OS X/.test(agent);
+      var isAppleDevice = isIOS || isMac;
+      var targetUrl = isAppleDevice ? appStoreUrl : playStoreUrl;
+      var ctaButton = document.getElementById("call_to_action_btn");
+
+      if (ctaButton) {
+        ctaButton.setAttribute("role", "link");
+        ctaButton.setAttribute("tabindex", "0");
+
+        ctaButton.addEventListener("click", function () {
+          window.location.href = targetUrl;
+        });
+
+        ctaButton.addEventListener("keydown", function (event) {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            window.location.href = targetUrl;
+          }
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
